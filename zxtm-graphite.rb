@@ -164,8 +164,10 @@ snmp_managers.each do |snmp_manager|
     @log.info "Scheduled collection job running for #{reported_host_name}"
     @log.info "Collecting metrics for #{reported_host_name}"
     begin 
+      @log.info "Collecting Pool metrics for #{reported_host_name}"
       pool_metrics = query_pools snmp_manager, reported_host_name
       @log.debug "Pool metrics collected: #{pool_metrics}"
+      @log.info "Collecting Virtualserver metrics for #{reported_host_name}"
       virtualserver_metrics = query_virtualservers snmp_manager, reported_host_name
       @log.debug "Virtualserver metrics collected: #{virtualserver_metrics}"
       @log.debug "Uploading metrics to #{options[:graphite_host]} for #{reported_host_name}"
